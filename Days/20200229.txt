@@ -1,0 +1,1 @@
+[["02:41","entertainment"],["11:26","sleep"],["11:33","bathroom"],["12:00","reading"],["12:30","driving"],["13:00","eating"],["16:31","TV"],["16:41","bathroom"],["16:56","TV"],["17:41","side work"],["18:11","entertainment"],["18:22","chores"],["23:30","entertainment"],["23:59","TV"]]

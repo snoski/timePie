@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TimePie</title>
+		<style>
+		</style>
+	</head>
+	<body>
+	<!--
+		<div class="inputDiv">
+			<label for="sTime">Start Time (0:00-23:59)</label><input name="sTime" id="sTime" type="time" min="00:00" max="23:59" step="60" value="00:00">
+		</div>
+		<div class="inputDiv">
+			<label for="eTime">End Time (0:00-23:59)</label><input name="eTime" id="eTime" type="time" min="00:00" max="23:59" step="1200" value="00:00">
+		</div>
+	-->
+		<div class="inputDiv">
+			<label for="cRad">Pie Radius</label><input name="cRad" id="cRad" type="number" min="0.1" max="50" step="1" value="148">
+		</div>
+		<div class="inputDiv">
+			<label for="sRad">Spiral Start Radius</label><input name="sRad" id="sRad" type="number" min="0.1" max="50" step="1" value="216">
+		</div>
+		<div class="inputDiv">
+			<label for="eRad">Spiral End Radius</label><input name="eRad" id="eRad" type="number" min="0.1" max="50" step="1" value="222">
+		</div>
+		<div id="buttonDiv">
+			<label>Open .png <input type="file" id="impBtn" name="impBtn" accept=".png" onchange="importCanvas();"></label>
+		</div>
+		<div id="buttonDiv">
+			<button id="pie" onclick="paint(this);">Add to Pie</button>
+			<button id="spiral" onclick="paint(this);">Add to Spiral</button>
+			<button id="clearBtn1" onclick="clearCanvas(this);">Clear Canvas 1</button>
+			<button id="clearBtn2" onclick="clearCanvas(this);">Clear Canvas 2</button>
+			<form id="canvas-options">
+	            <label>Save picture as Filename: <input type="text" class="filename" id="canvas-filename" placeholder="TimePie"/></label>
+	            <input type="submit" value="Save"/>
+	        </form>
+	        <form id="text-options">
+	            <label>Save text as Filename: <input type="text" class="filename" id="text-filename" placeholder="yyyymmdd"/></label>
+	            <input type="submit" value="Save"/>
+	        </form>
+		</div>
+		<div id="canvasDiv">
+			<canvas id="myCanvas" width="800px" height="800px" style="border: solid 1px">
+				canvas doesn't work in this browser
+			</canvas>
+			<canvas id="myCanvas2" width="800px" height="800px" style="border: solid 1px">
+				canvas doesn't work in this browser
+			</canvas>
+		</div>
+		<script type="text/javascript" src="filesaver.js"></script>
+		<script type="text/javascript" src="demo.js"></script>
+		<script type="text/javascript" src="canvas-toBlob.js"></script>
+		<script>
+			var canvas = document.getElementById("myCanvas");
+			var ctx = canvas.getContext("2d");
+			var canvas2 = document.getElementById("myCanvas2");
+			var ctx2 = canvas2.getContext("2d");
+
+			var myDay = [
+			['00:15','eating'],
+			['00:35','reading'],
+			['01:08','side work'],
+			['04:04','TV'],
+			['11:30','sleep'],
+			['11:55','reading'],
+			['12:02','bathroom'],
+			['12:24','eating'],
+			['13:17','TV'],
+			['13:42','main work'],
+			['14:03','bathroom'],
+			['14:11','eating'],
+			['14:29','main work'],
+			['15:12','reading'],
+			['15:17','main work'],
+			['15:34','admin'],
+			['15:54','main work'],
+			['','side work'],
+			];
+
+			var categories = {
+				'TV' : [225,225,255],
+				'sleep' : [0,0,0],
+				'main work' : [0,255,0],
+				'side work' : [0,255,255],
+				'reading' : [255,166,0],
+				'eating' : [255,0,0],
+				'entertainment' : [0,0,255],
+				'bathroom' : [163,127,7],
+				'chores' : [255,0,255],
+				'admin' : [175,175,175],
+				'driving' : [65,65,65],
+				'apiary' : [66,245,164],
+				'exercise' : [255,255,0],
+				'trivia hosting' : [200,255,88],
+				'social' : [255,0,85]
+			}
+			//DEFINE CANVAS VARS FOR USE IN FUNCTIONS
+			var myX, myY, r, g, b;
+
+			//DEFINE USER VARIABLES FOR USE IN FUNCTIONS
+			var circleRadius, startTimeElem, endTimeElem, startTime, endTime;
+
+			initializeCanvasVar();
+
+			function initializeCanvasVar() {
+				//INITIALIZE NON-USER CANVAS VARIABLES
+				//initialize location of paintbrush
+				myX = 400;
+				myY = 400;
+			}
+			
+			function drawSlice(x,y,radius,start,end,red,green,blue) {				
+					ctx.beginPath();
+					//parameters of arc are (x, y, radius, startAngle, endAngle [, anticlockwise])....note that the x and y are the rightmost point of the arc
+					ctx.arc(x, y, radius, start, end, false); // Outer circle
+					ctx.lineTo(x,y);
+					ctx.lineWidth = 0;
+					ctx.strokeStyle = `rgb(
+						${red},
+						${green},
+						${blue}
+					)`;
+					ctx.fillStyle = `rgb(
+						${red},
+						${green},
+						${blue}
+					)`;
+					ctx.stroke();
+					ctx.fill();
+			}
+
+			function paint(elem){
+				importCanvas(elem);
+				setPlaceholder(elem);
+				if (elem.id === 'pie') {
+					circleRadius = Number(document.getElementById("cRad").value);
+					startTime = -(Math.PI/2);
+					var endHours, endMinutes, cat, color;
+					for (var i = 0; i < myDay.length; i++){
+						endHours = Number(myDay[i][0].slice(0,2));
+						endMinutes = Number(myDay[i][0].slice(3))/60;
+						endTime = (((endHours + endMinutes)/24) * Math.PI * 2)-(Math.PI/2);
+						cat = myDay[i][1];
+						color = categories[cat];
+						drawSlice(myX,myY,circleRadius,startTime,endTime,color[0],color[1],color[2]);
+						startTime = endTime;
+					}
+				} else {
+					startTime = 0;
+					startRad = Number(document.getElementById("sRad").value);
+					endRad = Number(document.getElementById("eRad").value);
+					//console.log("startRad",startRad);
+					//console.log("endRad",endRad);
+					var adj = -(Math.PI/2);
+					var endHours, endMinutes, cat, color;
+					for (var h = 0; h < myDay.length; h++){
+						endHours = Number(myDay[h][0].slice(0,2));
+						endMinutes = Number(myDay[h][0].slice(3))/60;
+						endTime = (((endHours + endMinutes)/24) * Math.PI * 2);
+						cat = myDay[h][1];
+						color = categories[cat];
+						var timeIncr = (endTime - startTime)/100;				
+						for (var i = 0; i < 100; i++){
+							endTime = startTime + timeIncr;
+							//console.log("startTime",startTime);
+							//console.log("endTime",endTime);
+							circleRadius = (((startTime + endTime)/2)/(Math.PI*2))*(endRad-startRad)+startRad;
+							//console.log(circleRadius);
+							drawSlice(myX,myY,circleRadius,startTime+adj,endTime+adj,color[0],color[1],color[2]);
+							startTime = endTime;
+						}
+					}
+				}
+				setTimeout(function(){ctx.drawImage(canvas2,0,0);},100);
+			}
+
+			function clearCanvas(elem){
+				var id = elem.id;
+				if (id === "clearBtn1") {
+					ctx.clearRect(0, 0, canvas.width, canvas.height);
+				} else {
+					ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+				}
+			}
+
+			function setPlaceholder(elem) {
+				if (elem.id === 'pie') {
+					document.getElementById('canvas-filename').placeholder = "TimePie";
+				} else {
+					document.getElementById('canvas-filename').placeholder = "TimeSpiral";
+				}
+				var uDate = new Date();
+				var uYear = (uDate.getFullYear()).toFixed();
+				var uMth = (uDate.getMonth() + 1).toFixed();
+				if (uMth < 10) {
+					uMth = '0' + uMth;
+				}
+				var uDay = (uDate.getDate()).toFixed();
+				if (uDay < 10) {
+					uDay = '0' + uDay;
+				}
+				var pHolder = uYear + uMth + uDay;
+				document.getElementById('text-filename').placeholder = pHolder;
+			}
+
+			function importCanvas(elem){
+				var drawing = new Image();
+				if (elem.id === 'pie') {
+					drawing.src = "TimePie.png";
+				} else {
+					drawing.src = "TimeSpiral.png";
+				}
+				drawing.crossorigin = "anonymous";
+				drawing.onload = function() {
+			    	ctx2.drawImage(drawing,0,0);
+				}
+			    /*
+			    var image2 = new Image();
+
+			    image2.onload = function(){
+			        ctx2.drawImage("Days/kiss.PNG",0,0);
+			    }
+			    reader.onloadend = function () {
+			       image2.src = reader.result;
+			    }
+
+			    if (file) {
+			       reader.readAsDataURL(file); //reads the data as a URL
+			    } else {
+			       image2.src = "";
+			    }
+			    */
+			}
+		</script>
+	</body>
+</html>
+
