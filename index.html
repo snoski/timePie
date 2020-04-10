@@ -15,13 +15,13 @@
 		</div>
 	-->
 		<div class="inputDiv">
-			<label for="cRad">Pie Radius</label><input name="cRad" id="cRad" type="number" min="0.1" max="50" step="1" value="212">
+			<label for="cRad">Pie Radius</label><input name="cRad" id="cRad" type="number" min="0.1" max="50" step="1" value="220">
 		</div>
 		<div class="inputDiv">
-			<label for="sRad">Spiral Start Radius</label><input name="sRad" id="sRad" type="number" min="0.1" max="50" step="1" value="312">
+			<label for="sRad">Spiral Start Radius</label><input name="sRad" id="sRad" type="number" min="0.1" max="50" step="1" value="324">
 		</div>
 		<div class="inputDiv">
-			<label for="eRad">Spiral End Radius</label><input name="eRad" id="eRad" type="number" min="0.1" max="50" step="1" value="318">
+			<label for="eRad">Spiral End Radius</label><input name="eRad" id="eRad" type="number" min="0.1" max="50" step="1" value="330">
 		</div>
 		<div id="buttonDiv">
 			<label>Open .png <input type="file" id="impBtn" name="impBtn" accept=".png" onchange="importCanvas();"></label>
@@ -58,7 +58,27 @@
 			var ctx2 = canvas2.getContext("2d");
 
 			var myDay = [
-				['','TV'],
+				['01:12','side work'],
+				['01:18','bathroom'],
+				['01:25','chores'],
+				['02:00','TV'],
+				['08:00','sleep'],
+				['08:30','reading'],
+				['08:45','admin'],
+				['09:06','eating'],
+				['09:21','apiary'],
+				['12:02','main work'],
+				['12:12','chores'],
+				['12:43','eating'],
+				['14:48','main work'],
+				['14:53','bathroom'],
+				['15:04','chores'],
+				['16:35','main work'],
+				['16:45','bathroom'],
+				['16:59','admin'],
+				['19:00','sleep'],
+				['19:45','eating'],
+				['20:06','side work'],
 			];
 
 			var categories = {
