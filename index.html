@@ -15,13 +15,13 @@
 		</div>
 	-->
 		<div class="inputDiv">
-			<label for="cRad">Pie Radius</label><input name="cRad" id="cRad" type="number" min="0.1" max="50" step="1" value="220">
+			<label for="cRad">Pie Radius</label><input name="cRad" id="cRad" type="number" min="0.1" max="50" step="1" value="240">
 		</div>
 		<div class="inputDiv">
-			<label for="sRad">Spiral Start Radius</label><input name="sRad" id="sRad" type="number" min="0.1" max="50" step="1" value="324">
+			<label for="sRad">Spiral Start Radius</label><input name="sRad" id="sRad" type="number" min="0.1" max="50" step="1" value="354">
 		</div>
 		<div class="inputDiv">
-			<label for="eRad">Spiral End Radius</label><input name="eRad" id="eRad" type="number" min="0.1" max="50" step="1" value="330">
+			<label for="eRad">Spiral End Radius</label><input name="eRad" id="eRad" type="number" min="0.1" max="50" step="1" value="360">
 		</div>
 		<div id="buttonDiv">
 			<label>Open .png <input type="file" id="impBtn" name="impBtn" accept=".png" onchange="importCanvas();"></label>
@@ -58,27 +58,21 @@
 			var ctx2 = canvas2.getContext("2d");
 
 			var myDay = [
-				['01:12','side work'],
-				['01:18','bathroom'],
-				['01:25','chores'],
-				['02:00','TV'],
-				['08:00','sleep'],
-				['08:30','reading'],
-				['08:45','admin'],
-				['09:06','eating'],
-				['09:21','apiary'],
-				['12:02','main work'],
-				['12:12','chores'],
-				['12:43','eating'],
-				['14:48','main work'],
-				['14:53','bathroom'],
-				['15:04','chores'],
-				['16:35','main work'],
-				['16:45','bathroom'],
-				['16:59','admin'],
-				['19:00','sleep'],
-				['19:45','eating'],
-				['20:06','side work'],
+				['01:30','TV'],
+				['12:50','sleep'],
+				['14:06','TV'],
+				['14:12','bathroom'],
+				['14:24','eating'],
+				['17:04','main work'],
+				['17:15','bathroom'],
+				['18:07','main work'],
+				['18:18','bathroom'],
+				['18:26','main work'],
+				['18:39','eating'],
+				['19:26','side work'],
+				['19:50','bathroom'],
+				['20:10','TV'],
+				['','side work'],
 			];
 
 			var categories = {
