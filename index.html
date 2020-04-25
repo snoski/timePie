@@ -15,13 +15,13 @@
 		</div>
 	-->
 		<div class="inputDiv">
-			<label for="cRad">Pie Radius</label><input name="cRad" id="cRad" type="number" min="0.1" max="50" step="1" value="240">
+			<label for="cRad">Pie Radius</label><input name="cRad" id="cRad" type="number" min="0.1" max="50" step="1" value="272">
 		</div>
 		<div class="inputDiv">
-			<label for="sRad">Spiral Start Radius</label><input name="sRad" id="sRad" type="number" min="0.1" max="50" step="1" value="354">
+			<label for="sRad">Spiral Start Radius</label><input name="sRad" id="sRad" type="number" min="0.1" max="50" step="1" value="402">
 		</div>
 		<div class="inputDiv">
-			<label for="eRad">Spiral End Radius</label><input name="eRad" id="eRad" type="number" min="0.1" max="50" step="1" value="360">
+			<label for="eRad">Spiral End Radius</label><input name="eRad" id="eRad" type="number" min="0.1" max="50" step="1" value="408">
 		</div>
 		<div id="buttonDiv">
 			<label>Open .png <input type="file" id="impBtn" name="impBtn" accept=".png" onchange="importCanvas();"></label>
@@ -58,21 +58,78 @@
 			var ctx2 = canvas2.getContext("2d");
 
 			var myDay = [
+				['01:15','sleep'],
+				['01:21','side work'],
 				['01:30','TV'],
-				['12:50','sleep'],
-				['14:06','TV'],
-				['14:12','bathroom'],
-				['14:24','eating'],
-				['17:04','main work'],
-				['17:15','bathroom'],
-				['18:07','main work'],
-				['18:18','bathroom'],
-				['18:26','main work'],
-				['18:39','eating'],
-				['19:26','side work'],
-				['19:50','bathroom'],
-				['20:10','TV'],
-				['','side work'],
+				['01:35','bathroom'],
+				['01:45','eating'],
+				['02:51','apiary'],
+				['02:58','chores'],
+				['05:16','side work'],
+				['05:23','admin'],
+				['05:33','bathroom'],
+				['06:03','eating'],
+				['07:42','side work'],
+				['07:55','bathroom'],
+				['12:30','sleep'],
+				['01:26','TV'],
+				['02:10','eating'],
+				['02:22','chores'],
+				['03:54','main work'],
+				['03:58','bathroom'],
+				['04:15','chores'],
+				['04:30','reading'],
+				['04:52','side work'],
+				['05:08','bathroom'],
+				['07:35','side work'],
+				['08:06','eating'],
+				['23:59','side work'],
+				// ['01:46','side work'],
+				// ['01:54','bathroom'],
+				// ['03:02','side work'],
+				// ['03:12','chores'],
+				// ['13:25','sleep'],
+				// ['13:55','TV'],
+				// ['14:36','social'],
+				// ['14:40','bathroom'],
+				// ['15:05','chores'],
+				// ['15:25','eating'],
+				// ['17:30','main work'],
+				// ['17:46','eating'],
+				// ['18:03','main work'],
+				// ['18:21','chores'],
+				// ['19:00','side work'],
+				// ['22:00','entertainment'],
+				// ['23:00','chores'],
+				// ['23:59','side work'],
+				// ['01:39','side work'],
+				// ['01:42','bathroom'],
+				// ['01:50','chores'],
+				// ['04:45','sleep'],
+				// ['05:14','reading'],
+				// ['05:19','TV'],
+				// ['05:53','eating'],
+				// ['07:08','side work'],
+				// ['07:28','chores'],
+				// ['08:25','side work'],
+				// ['10:21','apiary'],
+				// ['10:25','bathroom'],
+				// ['10:52','main work'],
+				// ['11:16','eating'],
+				// ['12:14','main work'],
+				// ['12:21','chores'],
+				// ['16:52','sleep'],
+				// ['17:06','main work'],
+				// ['17:51','chores'],
+				// ['19:07','side work'],
+				// ['19:45:','eating'],
+				// ['20:09','chores'],
+				// ['20:14','bathroom'],
+				// ['23:59','side work'],
+				// ['00:25','side work'],
+				// ['00:41','TV'],
+				// ['00:50','bathroom'],
+				// ['02:27','side work'],
 			];
 
 			var categories = {
